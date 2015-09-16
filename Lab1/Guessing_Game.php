@@ -3,15 +3,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-    if (isset($_POST['target']) && isset($_POST['guess']))
+    if (isset($_POST['target']) && isset($_POST['target']))
     {
         $numberTarget = $_POST['target'];
-        $numberGuessed = $_POST['target'];
+        $numberGuessed = $_POST['guess'];
 
-        if ($numberGuessed <= $numberTarget)
+        if ($numberGuessed < $numberTarget)
         {
             $message = "Guess Higher";
-        } elseif ($numberGuessed >= $numberTarget)
+        } elseif ($numberGuessed > $numberTarget)
         {
             $message = "Guess Lower";
         } elseif ($numberGuessed == $numberTarget)
