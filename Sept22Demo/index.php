@@ -14,5 +14,4 @@
             echo "Hello from $firstName $lastName!";
             ?>
         </body>
-
 </html>
