@@ -34,9 +34,15 @@
         <form action= "<?php $_SERVER['PHP_SELF'] ?>" method="post">
             <p>Header String: <input type="text" name="string" /></p>
             <p>Header Size: <input type="text" name="number" /></p>
-            <p><input type="submit" name="Submit" value="Send Form"/></p>
+            <p><input type="submit" name="Submit" value="Generate Header"/></p>
         </form>
-        <p><?php headerEcho($_POST["string"], $_POST["number"]); ?></p>
+        <?php headerEcho($_POST["string"], $_POST["number"]); ?>
+        <?php
+            for($x = 1; $x <= 7; $x++){
+                $_POST["number"] = $x;
+                headerEcho($_POST["string"], $_POST["number"]);
+            }
+        ?>
 
     </body>
 </html>
