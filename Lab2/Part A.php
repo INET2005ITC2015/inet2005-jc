@@ -43,6 +43,59 @@
                 headerEcho($_POST["string"], $_POST["number"]);
             }
         ?>
+        <h1>Step 2</h1>
+        <?php
+        function appendText(&$string){
+            $string .=  ", but there is more";
+            echo $string;
+        }
+        ?>
+
+        <?php
+        function appendText2($string){
+            $string .= ", but there is more";
+            echo $string;
+        }
+        ?>
+
+        <?php
+        $str = "This is some random text";
+        echo "<br />$str";
+        ?>
+
+        <br />
+
+        <?php
+        appendText($str);
+        ?>
+
+        <br />
+
+        <?php
+        $str = "This is some random text";
+        echo "<br />$str";
+        ?>
+
+        <br />
+
+        <?php
+        appendText2($str);
+        ?>
+
+        <h1>Step 3</h1>
+
+        <?php
+        $myAge = 23;
+        function tellMeMyAge(){
+            global $myAge;
+            echo "<h1>Justin Cooke is $myAge";
+        }
+        tellMeMyAge()
+        ?>
+
+
+
+
 
     </body>
 </html>
