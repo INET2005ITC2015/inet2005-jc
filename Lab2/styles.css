@@ -1,0 +1,16 @@
+
+tr:nth-child(even) {
+    background: #CCC
+}
+
+tr:nth-child(odd) {
+    background: #FFF
+}
+
+th {
+    background: #CCC
+}
+
+table, th, td {
+    border: 1px solid black;
+}
