@@ -21,13 +21,10 @@
     <tbody>
 <?php
 
-    $search = $_POST["string"];
+    require_once('dbConn.php');
+    $db = getDBConnection();
 
-    $db = mysqli_connect("localhost","root", "inet2005","sakila");
-    if (!$db)
-    {
-        die('Could not connect to the Sakila Database: ' . mysqli_error($db));
-    }
+    $search = $_POST["string"];
 
     $result = mysqli_query($db,"SELECT * FROM film WHERE description LIKE  '%$search%'");
     if(!$result)
@@ -45,7 +42,7 @@
 
     }//end of while loop
 
-    mysqli_close($db);
+    closeDBConnection($db);
 
     ?>
     </tbody>
