@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>First Ten Films</title>
+    <title>Actors</title>
     <style type="text/css">
         table, td, th{
             border: double red;
@@ -26,10 +26,10 @@
     require_once('dbConn.php');
     $db = getDBConnection();
 
-    $fName = $_POST["fName"];
-    $lName = $_POST["lName"];
+    $fName = $_POST["firstName"];
+    $lName = $_POST["lastName"];
 
-    If(!empty($_POST['fName']) && !empty($_POST['lName'])) {
+    If(!empty($_POST['firstName']) && !empty($_POST['lastName'])) {
 
         $resultInsert = mysqli_query($db, "INSERT INTO actor (first_name, last_name) VALUES ('$fName','$lName')");
         if (!$resultInsert) {
@@ -37,42 +37,53 @@
         } else {
             echo "<h1>Actor Inserted</h1>";
         }
-    }
+    }//end of if
 
-    $resultDisplay = mysqli_query($db,"SELECT * FROM actor ORDER BY actor_id DESC LIMIT 10");
+        $resultDisplay = mysqli_query($db, "SELECT * FROM actor ORDER BY actor_id DESC LIMIT 10");
 
-    if(!$resultDisplay){
-        die('Could not display records from the Sakila Database: ' . mysqli_error($db));
-    }
+        if (!$resultDisplay) {
+            die('Could not display records from the Sakila Database: ' . mysqli_error($db));
+        }
 
-    while ($row = mysqli_fetch_assoc($resultDisplay))
-    {
-        ?>
-        <tr>
-            <td><?php echo $row["actor_id"] ?></td>
-            <td><?php echo $row["first_name"]?></td>
-            <td><?php echo $row["last_name"]?></td>
-            <td><?php echo $row["last_update"]?></td>
-        </tr>
-    <?php
+        while ($row = mysqli_fetch_assoc($resultDisplay)) {
+            ?>
+            <tr>
+                <td><?php echo $row["actor_id"] ?></td>
+                <td><?php echo $row["first_name"]?></td>
+                <td><?php echo $row["last_name"]?></td>
+                <td><?php echo $row["last_update"]?></td>
+            </tr>
+        <?php
 
-    }//end of while loop
+        }//end of while loop
 
-    closeDBConnection($db);
+        closeDBConnection($db);
 
     ?>
     </tbody>
 </table>
 
-<form action="index2.php" method="post" name="deleteRecord">
-    <p>Id to Delete<input name="actorId" type="text"></p>
-    <p><input name="deleteId" type="submit" value="Delete"></p>
+<form id="delForm" name="delForm" method="post" action="index2.php">
+    <p>
+        <label>Id to be deleted: <input type="text" name="actorId" id="actorId" /> </label>
+    </p>
+
+    <p>
+        <input type="submit" name="submit" id="submit" value="Submit" />
+    </p>
 </form>
 
-<form action="form2.php" method="post" name="updateRecord">
-    <p>Id to Update<input name="actorIdUpdate" type="text"></p>
-    <p><input name="updateId" type="submit" value="Update"></p>
+
+<form id="updateForm" name="updateForm" method="post" action="form2.php">
+    <p>
+        <label>Id to be Updated: <input type="text" name="actorId" id="actorId" /> </label>
+    </p>
+
+    <p>
+        <input type="submit" name="submit" id="submit" value="Submit" />
+    </p>
 </form>
+
 
 </body>
 </html>

@@ -2,21 +2,24 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Add Actor Form</title>
 </head>
 <body>
 
-<form action="index.php"  method="post" name="addActor">
-    <p>First Name:
-        <input name="fName" type="text" value="">
-    </p>
-    <p>Last Name:
-        <input name="lName" type="text" value="">
-    </p>
+<form id="addForm" name="addForm" method="post" action="index.php">
     <p>
-        <input name="AddActor" type="submit" value="Submit">
+        <label>First Name: <input type="text" name="firstName" id="firstName" /> </label>
+    </p>
+
+    <p>
+        <label>Last Name:<input type="text" name="lastName" id="lastName" /></label>
+    </p>
+
+    <p>
+        <input type="submit" name="submit" id="submit" value="Submit" />
     </p>
 </form>
+
 
 </body>
 </html>

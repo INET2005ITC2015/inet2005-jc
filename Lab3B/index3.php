@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Deleted Actors</title>
+    <title>Updated Actors</title>
 </head>
 <body>
 
@@ -11,14 +11,18 @@
 require_once('dbConn.php');
 $db = getDBConnection();
 
-$fName = $_POST["fName"];
-$lName = $_POST["lName"];
+$fName = $_POST["firstName"];
+$lName = $_POST["lastName"];
+
+$actorId = mysqli_query($db, "SELECT actor_id FROM actor WHERE first_name = $fName AND last_name = $lName");
+
+echo "<h1>$actorId</h1>";
 
 
-$resultDel = mysqli_query($db,"DELETE FROM actor WHERE actor_id = $idDel");
+$resultUpdate = mysqli_query($db,"UPDATE actor SET first_name = '$fName', last_name = '$lName' WHERE actor_id= '$actorId';");
 if(!$resultDel)
 {
-    die('Could not Delete records from the Sakila Database: ' . mysqli_error($db));
+    die('Could not Update records in the Sakila Database: ' . mysqli_error($db));
 }else{
     echo "<p>Successful! You have deleted"." ".mysqli_affected_rows($db)." ". "row(s).</p>";
 }

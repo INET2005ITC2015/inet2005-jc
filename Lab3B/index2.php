@@ -8,6 +8,8 @@
 
     <?php
 
+    if(!empty($_POST["actorId"])){
+
     require_once('dbConn.php');
     $db = getDBConnection();
 
@@ -22,8 +24,12 @@
     }
 
     closeDBConnection($db);
-    ?>
 
+
+    }else{
+    echo "<h1>Did Nothing</h1>";
+    }
+?>
     <a href="index.php">Back</a>
 
 </body>
