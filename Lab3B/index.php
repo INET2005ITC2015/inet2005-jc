@@ -29,12 +29,14 @@
     $fName = $_POST["fName"];
     $lName = $_POST["lName"];
 
-    $resultInsert = mysqli_query($db,"INSERT INTO actor (first_name, last_name) VALUES ('$fName','$lName')");
-    if(!$resultInsert)
-    {
-        die('Could not insert records to the Sakila Database: ' . mysqli_error($db));
-    }else{
-        echo"<h1>Actor Inserted</h1>";
+    If(!empty($_POST['fName']) && !empty($_POST['lName'])) {
+
+        $resultInsert = mysqli_query($db, "INSERT INTO actor (first_name, last_name) VALUES ('$fName','$lName')");
+        if (!$resultInsert) {
+            die('Could not insert records to the Sakila Database: ' . mysqli_error($db));
+        } else {
+            echo "<h1>Actor Inserted</h1>";
+        }
     }
 
     $resultDisplay = mysqli_query($db,"SELECT * FROM actor ORDER BY actor_id DESC LIMIT 10");
@@ -62,7 +64,7 @@
     </tbody>
 </table>
 
-<form action="<?php $_SERVER['PHP_SELF']?>" method="post" name="deleteRecord">
+<form action="index2.php" method="post" name="deleteRecord">
     <p><input name="actorId" type="text"></p>
     <p><input name="deleteId" type="submit" value="Delete"></p>
 </form>
