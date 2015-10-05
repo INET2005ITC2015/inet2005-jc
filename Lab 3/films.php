@@ -21,26 +21,29 @@
     <tbody>
 <?php
 
+    $search = $_POST["string"];
+
     $db = mysqli_connect("localhost","root", "inet2005","sakila");
     if (!$db)
     {
         die('Could not connect to the Sakila Database: ' . mysqli_error($db));
     }
 
-    $result = mysqli_query($db,"SELECT * FROM film LIMIT 0,10");
+    $result = mysqli_query($db,"SELECT * FROM film WHERE description LIKE  '%$search%'");
     if(!$result)
     {
         die('Could not retrieve records from the Sakila Database: ' . mysqli_error($db));
     }
     while ($row = mysqli_fetch_assoc($result))
     {
-        echo "<tr>";
-        echo "<td>" .$row["title"] . "</td>";
-        echo "<td>" .$row["description"] . "</td>";
-        //echo $row['title'] . " " . $row['description'];
-        echo "</tr>";
+        ?>
+        <tr>
+            <td><?php echo $row["title"] ?></td>
+            <td><?php echo $row["description"]?></td>
+        </tr>
+        <?php
 
-    }
+    }//end of while loop
 
     mysqli_close($db);
 
