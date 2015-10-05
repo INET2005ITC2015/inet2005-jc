@@ -65,8 +65,13 @@
 </table>
 
 <form action="index2.php" method="post" name="deleteRecord">
-    <p><input name="actorId" type="text"></p>
+    <p>Id to Delete<input name="actorId" type="text"></p>
     <p><input name="deleteId" type="submit" value="Delete"></p>
+</form>
+
+<form action="form2.php" method="post" name="updateRecord">
+    <p>Id to Update<input name="actorIdUpdate" type="text"></p>
+    <p><input name="updateId" type="submit" value="Update"></p>
 </form>
 
 </body>
