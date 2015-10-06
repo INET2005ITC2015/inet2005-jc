@@ -2,29 +2,30 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <script src="scripts.js"></script>
+    <title>Form Validation</title>
 </head>
 <body>
 
-<form id="Form" name="Form" method="post" action="thing.php">
-    <p>
-        <label>First Name: <input type="text" name="firstName" id="firstName" /> </label>
+<form id="Form" name="Form" method="post">
+    <p id = p1>
+        <label id="fNameLabel">First Name: <input type="text" name="firstName" id="firstName" onfocus="b1Click()"/></label>
     </p>
 
     <p>
-        <label>Last Name:<input type="text" name="lastName" id="lastName" /></label>
+        <label id="lNameLabel">Last Name: <input type="text" name="lastName" id="lastName" onfocus="b2Click()"/></label>
     </p>
 
     <p>
-        <label>Address 1: <input type="text" name="address1" id="address1" /> </label>
+        <label id="add1Label">Address 1: <input type="text" name="address1" id="address1" /> </label>
     </p>
 
     <p>
-        <label>Address 2: <input type="text" name="address2" id="address2" /> </label>
+        <label id="add2Label">Address 2: <input type="text" name="address2" id="address2" /> </label>
     </p>
 
     <p>
-        <label>Email: <input type="text" name="email" id="email" /> </label>
+        <label id="emailLabel">Email: <input type="text" name="email" id="email" /> </label>
     </p>
 
     <p>
