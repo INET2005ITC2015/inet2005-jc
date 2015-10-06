@@ -13,11 +13,7 @@ $db = getDBConnection();
 
 $fName = $_POST["firstName"];
 $lName = $_POST["lastName"];
-
-$actorId = mysqli_query($db, "SELECT actor_id FROM actor WHERE first_name = $fName AND last_name = $lName");
-
-echo "<h1>$actorId</h1>";
-
+$actorId = $_POST["actorID"];
 
 $resultUpdate = mysqli_query($db,"UPDATE actor SET first_name = '$fName', last_name = '$lName' WHERE actor_id= '$actorId';");
 if(!$resultUpdate)
