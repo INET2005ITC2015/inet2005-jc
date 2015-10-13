@@ -36,16 +36,42 @@
     <tbody>
     <?php
 
+    $limit = 25;
+
     require_once('dbConn.php');
     $db = getDBConnection();
 
     //$search = $_POST["string"];
 
-    $result = mysqli_query($db,"SELECT * FROM employees"); //WHERE description LIKE  '%$search%'");
+    $sql = "SELECT COUNT(emp_no) FROM employees"; //WHERE description LIKE  '%$search%'");
+    $result = mysqli_query($db,$sql);
+
     if(!$result)
     {
         die('Could not retrieve records from the Employees Database: ' . mysqli_error($db));
     }
+
+    $row_count= mysqli_num_rows($result);
+
+    if (isset($_GET{"page"})){
+        $page= $_GET{"page"}+1;
+        $offset = $limit * $page;
+    }else{
+        $page=0;
+        $offset=0;
+    }
+
+    $left_rec = $row_count - (($page * $limit));
+
+
+    $sql = "SELECT * FROM employees LIMIT $offset, $limit";
+    $result = mysqli_query($db, $sql);
+
+     if(!$result)
+     {
+         die('Could not retrieve records from the Employees Database: ' . mysqli_error($db));
+     }
+
     while ($row = mysqli_fetch_assoc($result))
     {
         ?>
@@ -60,12 +86,29 @@
     <?php
 
     }//end of while loop
+    if( $page > 0 )
+    {
+        $last = $page - 2;
+        echo "<a href=\"$_PHP_SELF?page=$last\">Last 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?page=$page\">Next 25 Records</a>";
+    }
+
+    else if( $page == 0 )
+    {
+        echo "<a href=\"$_PHP_SELF?page=$page\">Next 25 Records</a>";
+    }
+
+    else if( $left_rec < $limit )
+    {
+        $last = $page - 2;
+        echo "<a href=\"$_PHP_SELF?page=$last\">Last 25 Records</a>";
+    }
+
 
     closeDBConnection($db);
 
     ?>
     </tbody>
 </table>
-
 </body>
 </html>
