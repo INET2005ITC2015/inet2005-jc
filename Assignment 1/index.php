@@ -41,9 +41,9 @@
     require_once('dbConn.php');
     $db = getDBConnection();
 
-    //$search = $_POST["string"];
+    $search = $_POST["string"];
 
-    $sql = "SELECT COUNT(emp_no) FROM employees"; //WHERE description LIKE  '%$search%'");
+    $sql = "SELECT COUNT(emp_no) FROM employees";
     $result = mysqli_query($db,$sql);
 
     if(!$result)
@@ -64,7 +64,7 @@
     $left_rec = $row_count - (($page * $limit));
 
 
-    $sql = "SELECT * FROM employees LIMIT $offset, $limit";
+    $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' LIMIT $offset, $limit";
     $result = mysqli_query($db, $sql);
 
      if(!$result)
