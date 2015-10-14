@@ -1,24 +1,26 @@
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Employees</title>
-    <style type="text/css">
-        table, td, th{
-            border: double red;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
-<form action="index.php"  method="post" name="Search">
+<form action="<?php $_SERVER['PHP_SELF']; ?>"  method="get" name="Search">
     <p>Search:
-        <input name="string" type="text" value="">
+        <input name="string" type="text" value="<?php echo $_GET['string'];?>">
     </p>
 
     <p>
         <input name="DisplayInfo" type="submit" value="Search Query">
+    </p>
+</form>
+
+<form action="create.html"  method="post" name="Create">
+    <p>
+        <input name="create" type="submit" value="Add Employee Record">
     </p>
 </form>
 
@@ -41,9 +43,9 @@
     require_once('dbConn.php');
     $db = getDBConnection();
 
-    $search = $_POST["string"];
+    $search = $_GET["string"];
 
-    $sql = "SELECT COUNT(emp_no) FROM employees";
+    $sql = "SELECT COUNT(emp_no) FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%'";
     $result = mysqli_query($db,$sql);
 
     if(!$result)
@@ -51,7 +53,10 @@
         die('Could not retrieve records from the Employees Database: ' . mysqli_error($db));
     }
 
-    $row_count= mysqli_num_rows($result);
+    $row = mysqli_fetch_array($result, MYSQLI_NUM);
+    $row_count=$row[0];
+
+    echo "<p>$row_count</p>";
 
     if (isset($_GET{"page"})){
         $page= $_GET{"page"}+1;
@@ -82,6 +87,24 @@
             <td><?php echo $row["last_name"] ?></td>
             <td><?php echo $row["gender"] ?></td>
             <td><?php echo $row["hire_date"]?></td>
+            <td>
+                <form action="update.php"  method="post" name="UpdateForm">
+                    <input id = "update" name="update" type="submit" value="">
+                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>"
+                    <input type="hidden" name="birth_day" value="<?php echo $row["birth_date"]?>"
+                    <input type="hidden" name="first_name" value="<?php echo $row["first_night"]?>"
+                    <input type="hidden" name="last_name" value="<?php echo $row["last_name"]?>"
+                    <input type="hidden" name="gender" value="<?php echo $row["gender"]?>"
+                    <input type="hidden" name="hire_date" value="<?php echo $row["hire_date"]?>"
+                </form>
+            </td>
+            <td>
+                <form action="del.php"  method="post" name="DelForm">
+                    <input id = "del" name="del" type="submit" value="">
+                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>"
+                </form>
+            </td>
+
         </tr>
     <?php
 
@@ -89,19 +112,19 @@
     if( $page > 0 )
     {
         $last = $page - 2;
-        echo "<a href=\"$_PHP_SELF?page=$last\">Last 25 Records</a>";
-        echo "<a href=\"$_PHP_SELF?page=$page\">Next 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last\">Last 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page\">Next 25 Records</a>";
     }
 
     else if( $page == 0 )
     {
-        echo "<a href=\"$_PHP_SELF?page=$page\">Next 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page\">Next 25 Records</a>";
     }
 
     else if( $left_rec < $limit )
     {
         $last = $page - 2;
-        echo "<a href=\"$_PHP_SELF?page=$last\">Last 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last\">Last 25 Records</a>";
     }
 
 
