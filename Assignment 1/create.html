@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form id="addForm" name="addForm" method="post" action="create.php">
+<form id="addForm" name="addForm" method="post" action="create.php" onSubmit="return checkForm()">
     <p>
         <label>First Name: <input type="text" name="firstName" id="firstName" /></label><span id="Warning"></span>
     </p>
@@ -25,15 +25,17 @@
     </p>
 
     <p>
-        <input type="checkbox" name="male" id= "male">Male<span id="Warning5"></span>
+        <input type="checkbox" name="male" id= "male">Male
     </p>
 
     <p>
-        <input type="checkbox" name="female" id= "female">Female<span id="Warning6"></span>
+        <input type="checkbox" name="female" id= "female">Female
     </p>
 
+    <span id="Warning5"></span>
+
     <p>
-        <input type="button" name="submit" id="submit" value="Submit" onsubmit="return checkForm()"/>
+        <input type="submit" name="submit" id="submit" value="Submit"/>
     </p>
 </form>
 

@@ -1,64 +1,55 @@
-/**
- * Created by inet2005 on 10/13/15.
- */
-
-var nameReg = "(^[A-Z]{1})[a-z]+";
+var nameReg = /(^[A-Z]{1})[a-z]+/;
 var nameCheck = new RegExp(nameReg);
+
+var dateReg = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
+var dateCheck = new RegExp(dateReg);
 
 function checkForm() {
 
     var fName = document.getElementById("firstName").value;
+    var lName = document.getElementById("lastName").value;
+    var hDate = document.getElementById("hireDate").value;
+    var bDate = document.getElementById("birthDate").value;
+    var maleCheck = document.getElementById('male').checked;
+    var femaleCheck = document.getElementById('female').checked;
 
     if (nameCheck.exec(fName) == null) {
-        event.preventDefault();
+        //event.preventDefault();
         document.getElementById("firstName").style.borderColor = "red";
-        alert("Please fill in highlighted text field");
-        return false;
-    }
-    else if (document.forms["Form"].lastName.value.length == 0) {
-        document.getElementById("lastName").style.borderColor = "red";
-        alert("Please fill in highlighted text field");
-        return false;
-    }
-    else if (document.forms["Form"].address1.value.length == 0) {
-        document.getElementById("address1").style.borderColor = "red";
-        alert("Please fill in highlighted text field");
-        return false;
-    }
-    else if (document.forms["Form"].address2.value.length == 0) {
-        document.getElementById("address2").style.borderColor = "red";
-        alert("Please fill in highlighted text field");
-        return false;
-    }
-    else if (document.forms["Form"].email.value.length == 0) {
-        document.getElementById("email").style.borderColor = "red";
-        alert("Please fill in highlighted text field");
-        return false;
-    }
-    else if (document.Form.accept.checked == false) {
-        document.getElementById("Warning").innerHTML = "Please check that you have accepted terms!";
+        document.getElementById("Warning").innerHTML = "Please enter proper first name.";
         document.getElementById("Warning").style.color = "red";
         return false;
+    }
+    else if (nameCheck.exec(lName) == null) {
+        //event.preventDefault();
+        document.getElementById("lastName").style.borderColor = "red";
+        document.getElementById("Warning2").innerHTML = "Please enter proper first name.";
+        document.getElementById("Warning2").style.color = "red";
+        return false;
+    }
+    else if (dateCheck.exec(bDate) == null) {
+        //event.preventDefault();
+        document.getElementById("birthDate").style.borderColor = "red";
+        document.getElementById("Warning3").innerHTML = "Please enter proper date.";
+        document.getElementById("Warning3").style.color = "red";
+        return false;
+    }
+    else if (dateCheck.exec(hDate) == null) {
+        //event.preventDefault();
+        document.getElementById("birthDate").style.borderColor = "red";
+        document.getElementById("Warning4").innerHTML = "Please enter proper date.";
+        document.getElementById("Warning4").style.color = "red";
+        return false;
+    }
+    else if (maleCheck == false && femaleCheck == false) {
+        document.getElementById("Warning5").innerHTML = " Please chose a gender";
+        document.getElementById("Warning5").style.color = "red";
+        return false;
+    }
+    else if (maleCheck == true && femaleCheck == true){
+        document.getElementById("Warning5").innerHTML = " Please chose only one gender";
+        document.getElementById("Warning5").style.color = "red";
+        return false;
     } else {
-        alert("You Did it!")
-    }
-
-}
-function change(fieldID){
-
-    var formItem = document.getElementById(fieldID);
-    if(formItem != null){
-        formItem.style.backgroundColor = "Yellow";
-        formItem.style.fontStyle = "Italic";
-        formItem.parentNode.style.textDecoration = "underline"
-    }
-}
-
-function changeBack(fieldID){
-    var formItem = document.getElementById(fieldID);
-    if(formItem != null){
-        formItem.style.backgroundColor = "White";
-        formItem.style.fontStyle = "normal";
-        formItem.parentNode.style.textDecoration = "none"
     }
 }
