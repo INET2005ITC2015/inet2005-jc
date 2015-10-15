@@ -12,13 +12,16 @@ if(!$db){
 $loginUser = $_POST["loginUser"];
 $loginPassword = $_POST["loginPassword"];
 
+
 $loginUser = stripslashes($loginUser);
 $loginPassword = stripcslashes($loginPassword);
 
 $loginUser = mysqli_real_escape_string($db,$loginUser);
 $loginPassword = mysqli_real_escape_string($db,$loginPassword);
 
-$sql = "Select * FROM WebUsers WHERE user_name = '$loginUser' and user_password = '$loginPassword'";
+$hashPwd = hash("sha512",$loginPassword);
+
+$sql = "Select * FROM WebUsers WHERE user_name = '$loginUser' and user_password = '$hashPwd'";
 
 $result = mysqli_query($db, $sql);
 
@@ -27,7 +30,6 @@ $count = mysqli_num_rows($result);
 mysqli_close($db);
 
 if($count == 1){
-
     $_SESSION['loginUser'] = $loginUser;
     header("location:index.php");
 }else{
