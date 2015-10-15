@@ -90,18 +90,13 @@
             <td>
                 <form action="update.php"  method="post" name="UpdateForm">
                     <input id = "update" name="update" type="submit" value="">
-                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>"
-                    <input type="hidden" name="birth_day" value="<?php echo $row["birth_date"]?>"
-                    <input type="hidden" name="first_name" value="<?php echo $row["first_night"]?>"
-                    <input type="hidden" name="last_name" value="<?php echo $row["last_name"]?>"
-                    <input type="hidden" name="gender" value="<?php echo $row["gender"]?>"
-                    <input type="hidden" name="hire_date" value="<?php echo $row["hire_date"]?>"
+                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>">
                 </form>
             </td>
             <td>
                 <form action="del.php"  method="post" name="DelForm">
                     <input id = "del" name="del" type="submit" value="">
-                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>"
+                    <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>">
                 </form>
             </td>
 
@@ -127,8 +122,6 @@
         echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last\">Last 25 Records</a>";
     }
 
-
-    closeDBConnection($db);
 
     ?>
     </tbody>

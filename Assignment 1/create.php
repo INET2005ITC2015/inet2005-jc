@@ -36,6 +36,7 @@ while ($row = mysqli_fetch_assoc($result)){
     } else {
         echo "<h1>Employee Inserted</h1>";
     }
+
 ?>
 
 </body>
