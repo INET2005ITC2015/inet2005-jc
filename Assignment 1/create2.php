@@ -45,5 +45,8 @@ while ($row = mysqli_fetch_assoc($result)){
 
 ?>
 <a href="index.php">Back</a>
+<form name="LogOutForm" action="logOut.php" method="post">
+    <input type="submit" name="logOutButton" value="Log Out">
+</form>
 </body>
 </html>

@@ -29,13 +29,12 @@ mysqli_close($db);
 if($count == 1){
 
     $_SESSION['loginUser'] = $loginUser;
-    $_SESSION['loginPassword'] = $loginPassword;
     header("location:index.php");
 }else{
     echo "Wrong Password or User Name";
     echo "<br />";
     echo "<a href ='login.html'> Try Again</a>";
 }
-
+ob_end_flush();
 ?>
 

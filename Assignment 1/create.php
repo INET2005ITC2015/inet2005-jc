@@ -41,6 +41,10 @@ checkIfLoggedIn();
     </p>
 </form>
 
+<form name="LogOutForm" action="logOut.php" method="post">
+    <input type="submit" name="logOutButton" value="Log Out">
+</form>
+
 
 </body>
 
