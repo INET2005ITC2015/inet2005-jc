@@ -1,3 +1,10 @@
+<?php
+
+require 'isLoggedIn.php';
+checkIfLoggedIn();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">

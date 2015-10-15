@@ -1,4 +1,9 @@
+<?php
 
+require 'isLoggedIn.php';
+checkIfLoggedIn();
+
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -19,7 +24,7 @@
     </p>
 </form>
 
-<form action="create.html"  method="post" name="Create">
+<form action="create.php"  method="post" name="Create">
     <p>
         <input name="create" type="submit" value="Add Employee Record">
     </p>
