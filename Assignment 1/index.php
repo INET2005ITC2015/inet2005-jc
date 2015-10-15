@@ -69,7 +69,7 @@
     $left_rec = $row_count - (($page * $limit));
 
 
-    $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' LIMIT $offset, $limit " ;
+    $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' LIMIT $offset, $limit" ;
     $result = mysqli_query($db, $sql);
 
      if(!$result)

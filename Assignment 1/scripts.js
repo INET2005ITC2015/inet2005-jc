@@ -4,14 +4,16 @@ var nameCheck = new RegExp(nameReg);
 var dateReg = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
 var dateCheck = new RegExp(dateReg);
 
+var genderReg  = /^[M|F]$/;
+var genderCheck = new RegExp(genderReg);
+
 function checkForm() {
 
     var fName = document.getElementById("firstName").value;
     var lName = document.getElementById("lastName").value;
     var hDate = document.getElementById("hireDate").value;
     var bDate = document.getElementById("birthDate").value;
-    var maleCheck = document.getElementById('male').checked;
-    var femaleCheck = document.getElementById('female').checked;
+    var gender = document.getElementById('gender').value;
 
     if (nameCheck.exec(fName) == null) {
         //event.preventDefault();
@@ -36,20 +38,16 @@ function checkForm() {
     }
     else if (dateCheck.exec(hDate) == null) {
         //event.preventDefault();
-        document.getElementById("birthDate").style.borderColor = "red";
+        document.getElementById("hireDate").style.borderColor = "red";
         document.getElementById("Warning4").innerHTML = "Please enter proper date.";
         document.getElementById("Warning4").style.color = "red";
         return false;
     }
-    else if (maleCheck == false && femaleCheck == false) {
-        document.getElementById("Warning5").innerHTML = " Please chose a gender";
+    else if (genderCheck.exec(gender) == null) {
+        document.getElementById("gender").style.borderColor = "red";
+        document.getElementById("Warning5").innerHTML = " Please enter a gender";
         document.getElementById("Warning5").style.color = "red";
         return false;
     }
-    else if (maleCheck == true && femaleCheck == true){
-        document.getElementById("Warning5").innerHTML = " Please chose only one gender";
-        document.getElementById("Warning5").style.color = "red";
-        return false;
-    } else {
-    }
+
 }
