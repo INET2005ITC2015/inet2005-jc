@@ -51,3 +51,10 @@ function checkForm() {
     }
 
 }
+
+function confirmCheck(){
+   var check =  confirm("Delete this record?");
+    if(check == false){
+        event.preventDefault()
+    }
+}

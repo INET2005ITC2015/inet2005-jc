@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Employees</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="scripts.js"></script>
 </head>
 <body>
 
@@ -95,7 +96,7 @@
             </td>
             <td>
                 <form action="del.php"  method="post" name="DelForm">
-                    <input id = "del" name="del" type="submit" value="">
+                    <input id = "del" name="del" type="submit" value="" onclick="if(!confirm('Delete this record?')){return false;}">
                     <input type="hidden" name="emp_no" value="<?php echo $row["emp_no"]?>">
                 </form>
             </td>
