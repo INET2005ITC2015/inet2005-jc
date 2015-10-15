@@ -26,7 +26,6 @@ if(!$result)
 
 while ($row = mysqli_fetch_assoc($result)){
     $num = $row['emp_no']+1;
-    echo"<h1>$num</h1>";
 }
 
 
@@ -34,10 +33,10 @@ while ($row = mysqli_fetch_assoc($result)){
     if (!$resultInsert) {
         die('Could not insert records to the Employees Database: ' . mysqli_error($db));
     } else {
-        echo "<h1>Employee Inserted</h1>";
+        echo "<p>You have added ". $fName. " " . $lName. " to the employees table </p>";
     }
 
 ?>
-
+<a href="index.php">Back</a>
 </body>
 </html>
