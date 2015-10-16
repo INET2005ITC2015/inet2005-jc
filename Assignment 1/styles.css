@@ -13,3 +13,7 @@ table, td, th{
 .log{
     float:right;
 }
+
+#asc{
+    margin-left: 2%;
+}

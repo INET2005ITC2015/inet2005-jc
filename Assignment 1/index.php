@@ -23,17 +23,13 @@ checkIfLoggedIn();
 
 <!-- Query Form -->
 <form action="<?php $_SERVER['PHP_SELF']; ?>"  method="get" name="Search">
-    <p>Search:
-        <input name="string" type="text" value="<?php echo $_GET['string'];?>">
-    </p>
+    <label>Search: <input name="string" type="text" value="<?php echo $_GET['string'];?>"></label>
 
-    <p>
         <input name="DisplayInfo" type="submit" value="Search Query">
-    </p>
 </form>
 
 <!-- Create Employee Button -->
-<form action="create.php"  method="post" name="Create">
+<form action="create.php"  method="post" name="Create" id="create">
     <p>
         <input name="create" type="submit" value="Add Employee Record">
     </p>
@@ -61,9 +57,9 @@ checkIfLoggedIn();
 
     $search = $_GET["string"]; //get string form query or url
 
-    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Desc=Sort+Desc\">Desc</a>";
-    echo "<br />";
-    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Asc=Sort+Asc\">Asc</a>";
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Desc=Sort+Desc\" id='desc'>Sort Desc</a>";
+
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Asc=Sort+Asc\" id='asc'>Sort Asc</a>";
 
     $sql = "SELECT COUNT(emp_no) FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%'";
     $result = mysqli_query($db,$sql);
@@ -76,7 +72,7 @@ checkIfLoggedIn();
     $row = mysqli_fetch_array($result, MYSQLI_NUM);
     $row_count=$row[0];
 
-    echo "<p>$row_count</p>";
+    echo "<p>$row_count results from query</p>";
 
     if (isset($_GET{"page"})){
         $page= $_GET{"page"}+1;
