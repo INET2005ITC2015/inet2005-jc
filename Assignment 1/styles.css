@@ -9,3 +9,7 @@ table, td, th{
 #update{
     background-image: url("pencil.png");
 }
+
+.log{
+    float:right;
+}

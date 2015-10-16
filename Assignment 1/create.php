@@ -1,4 +1,3 @@
-
 <?php
 
 require 'isLoggedIn.php';
@@ -12,8 +11,16 @@ checkIfLoggedIn();
     <meta charset="UTF-8">
     <title>Add Actor Form</title>
     <script src="scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+
+<div class = "log">
+    <p><?php echo $_SESSION["loginUser"] ?> ,Logged In</p>
+    <form name="LogOutForm" action="logOut.php" id = "logBtn" method="post">
+        <input type="submit" name="logOutButton" value="Log Out">
+    </form>
+</div>
 
 <form id="addForm" name="addForm" method="post" action="create2.php" onSubmit="return checkForm()">
     <p>
@@ -40,11 +47,6 @@ checkIfLoggedIn();
         <input type="submit" name="submit" id="submit" value="Submit"/>
     </p>
 </form>
-
-<form name="LogOutForm" action="logOut.php" method="post">
-    <input type="submit" name="logOutButton" value="Log Out">
-</form>
-
 
 </body>
 

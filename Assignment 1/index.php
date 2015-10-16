@@ -1,8 +1,8 @@
-<?php
 
+<!-- login validation -->
+<?php
 require 'isLoggedIn.php';
 checkIfLoggedIn();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,14 @@ checkIfLoggedIn();
 </head>
 <body>
 
+<div class = "log">
+<p><?php echo $_SESSION["loginUser"] ?> ,Logged In</p>
+<form name="LogOutForm" action="logOut.php" id = "logBtn" method="post">
+    <input type="submit" name="logOutButton" value="Log Out">
+</form>
+</div>
+
+<!-- Query Form -->
 <form action="<?php $_SERVER['PHP_SELF']; ?>"  method="get" name="Search">
     <p>Search:
         <input name="string" type="text" value="<?php echo $_GET['string'];?>">
@@ -24,12 +32,14 @@ checkIfLoggedIn();
     </p>
 </form>
 
+<!-- Create Employee Button -->
 <form action="create.php"  method="post" name="Create">
     <p>
         <input name="create" type="submit" value="Add Employee Record">
     </p>
 </form>
 
+<!-- Start of display table -->
 <table>
     <thead>
     <tr>
@@ -44,12 +54,16 @@ checkIfLoggedIn();
     <tbody>
     <?php
 
-    $limit = 25;
+    $limit = 25; // How many records to display at once
 
     require_once('dbConn.php');
     $db = getDBConnection();
 
-    $search = $_GET["string"];
+    $search = $_GET["string"]; //get string form query or url
+
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Desc=Sort+Desc\">Desc</a>";
+    echo "<br />";
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Asc=Sort+Asc\">Asc</a>";
 
     $sql = "SELECT COUNT(emp_no) FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%'";
     $result = mysqli_query($db,$sql);
@@ -74,8 +88,18 @@ checkIfLoggedIn();
 
     $left_rec = $row_count - (($page * $limit));
 
+    if(isset($_GET["Desc"])){
+        $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY emp_no DESC LIMIT $offset, $limit" ;
+        $sort = "Desc=Sort+Desc";
+    }else if(isset($_GET["Asc"])){
+        $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY emp_no ASC LIMIT $offset, $limit" ;
+        $sort = "Asc=Sort+Asc";
+    }else{
+        $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' LIMIT $offset, $limit";
+        $sort = "";
+    }
 
-    $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' LIMIT $offset, $limit" ;
+
     $result = mysqli_query($db, $sql);
 
      if(!$result)
@@ -113,29 +137,25 @@ checkIfLoggedIn();
     if( $page > 0 )
     {
         $last = $page - 2;
-        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last\">Last 25 Records</a>";
-        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page\">Next 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last&$sort\">Last 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page&$sort\">Next 25 Records</a>";
     }
 
     else if( $page == 0 )
     {
-        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page\">Next 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$page&$sort\">Next 25 Records</a>";
     }
 
     else if( $left_rec < $limit )
     {
         $last = $page - 2;
-        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last\">Last 25 Records</a>";
+        echo "<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&page=$last&$sort\">Last 25 Records</a>";
     }
 
 
     ?>
     </tbody>
 </table>
-
-<form name="LogOutForm" action="logOut.php" method="post">
-    <input type="submit" name="logOutButton" value="Log Out">
-</form>
 
 </body>
 </html>

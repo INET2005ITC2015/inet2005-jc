@@ -10,10 +10,18 @@ checkIfLoggedIn();
 <head lang="en">
   <meta charset="UTF-8">
     <script src="scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Update Employee</title>
 
 </head>
 <body>
+
+<div class = "log">
+    <p><?php echo $_SESSION["loginUser"] ?> ,Logged In</p>
+    <form name="LogOutForm" action="logOut.php" id = "logBtn" method="post">
+        <input type="submit" name="logOutButton" value="Log Out">
+    </form>
+</div>
 <?php
 
     require_once('dbConn.php');
@@ -67,9 +75,6 @@ checkIfLoggedIn();
         </p>
 
     </form>
-<form name="LogOutForm" action="logOut.php" method="post">
-    <input type="submit" name="logOutButton" value="Log Out">
-</form>
 
 </body>
 </html>
