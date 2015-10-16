@@ -57,9 +57,9 @@ checkIfLoggedIn();
 
     $search = $_GET["string"]; //get string form query or url
 
-    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Desc=Sort+Desc\" id='desc'>Sort Desc</a>";
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Desc=Sort+Desc\" id='desc'>Sort Desc</a>"; //Setting table as descending
 
-    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Asc=Sort+Asc\" id='asc'>Sort Asc</a>";
+    echo"<a href=\"$_PHP_SELF?string=$search&DisplayInfo=Search+Query&Asc=Sort+Asc\" id='asc'>Sort Asc</a>"; //Setting table in ascending
 
     $sql = "SELECT COUNT(emp_no) FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%'";
     $result = mysqli_query($db,$sql);
@@ -72,7 +72,7 @@ checkIfLoggedIn();
     $row = mysqli_fetch_array($result, MYSQLI_NUM);
     $row_count=$row[0];
 
-    echo "<p>$row_count results from query</p>";
+    echo "<p>$row_count results from query</p>"; //Display amount of records in query
 
     if (isset($_GET{"page"})){
         $page= $_GET{"page"}+1;
@@ -84,6 +84,7 @@ checkIfLoggedIn();
 
     $left_rec = $row_count - (($page * $limit));
 
+    //Determining what sql query to run based on order by
     if(isset($_GET["Desc"])){
         $sql = "SELECT * FROM employees WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' ORDER BY emp_no DESC LIMIT $offset, $limit" ;
         $sort = "Desc=Sort+Desc";
@@ -129,7 +130,9 @@ checkIfLoggedIn();
         </tr>
     <?php
 
-    }//end of while loop
+    }
+
+    //Pagging done through get
     if( $page > 0 )
     {
         $last = $page - 2;
