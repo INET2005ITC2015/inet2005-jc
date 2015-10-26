@@ -6,7 +6,7 @@
  * Time: 5:51 AM
  */
 require_once("Shape.php");
-class Rectangle extends Shape {
+class Rectangle extends Shape{
 
     private $width;
     private $height;
@@ -21,5 +21,4 @@ class Rectangle extends Shape {
         $area = $this->width * $this->height;
         return $area;
     }
-
 }

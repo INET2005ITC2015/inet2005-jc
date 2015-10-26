@@ -6,7 +6,7 @@
  * Time: 5:51 AM
  */
 require_once("Shape.php");
-class Triangle extends Shape {
+class Triangle extends Shape  implements iResizable  {
 
     private $base;
     private $height;
@@ -20,6 +20,10 @@ class Triangle extends Shape {
     public function CalculateSize(){
         $area = ($this->base * $this->height)/2;
         return $area;
+    }
+
+    public function changeSize($area, $changeSize){
+
     }
 
 
