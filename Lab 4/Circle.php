@@ -6,6 +6,7 @@
  * Time: 5:51 AM
  */
 require_once("Shape.php");
+require_once("iResizeable.php");
 class Circle extends Shape implements iResizable {
 
     private $radius;
@@ -21,27 +22,12 @@ class Circle extends Shape implements iResizable {
         return $area;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRadius()
+    public function changeSize($area, $changeSize)
     {
-        return $this->radius;
-    }
-
-    /**
-     * @param mixed $radius
-     */
-    public function setRadius($radius)
-    {
-        $this->radius = $radius;
-    }
-
-    public function changeSize($area, $changeSize){
-      $changePercent =  $changeSize/100;
-
-
+        $changePercent = $changeSize / 100;
+        $newArea = $area * $changePercent;
+        $newRadius = sqrt($newArea/3.14);
+        return $newRadius;
 
     }
-
 }

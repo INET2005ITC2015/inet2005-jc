@@ -6,10 +6,12 @@
  * Time: 5:51 AM
  */
 require_once("Shape.php");
+require_once("iResizeable.php");
 class Triangle extends Shape  implements iResizable  {
 
     private $base;
     private $height;
+    private $area;
 
     public function __construct($in_name, $in_base, $in_height){
         parent::__construct($in_name);
@@ -24,7 +26,9 @@ class Triangle extends Shape  implements iResizable  {
 
     public function changeSize($area, $changeSize){
 
+        $changePercent = $changeSize / 100;
+        $newArea = $area * $changePercent;
+        $newHeight = ($newArea/$this->base)*2;
+        return $newHeight;
     }
-
-
 }

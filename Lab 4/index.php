@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -24,6 +28,11 @@
         Height: <input type="text" name="heightT">
     </fieldset>
 
+    <fieldset>
+        <legend>Resize:</legend>
+        Percent:   <input type="text" name="percent">
+    </fieldset>
+
     <input type="Submit" value="Calc">
 </form>
 
@@ -39,18 +48,23 @@ $myCircle = new Circle('Circle', $_POST["radius"]);
 
 echo "<h1>Shape: ".$myCircle->getName()."</h1>";
 echo "<p> Area: ".$myCircle->CalculateSize()."</p>";
+$newRadius = $myCircle->changeSize($myCircle->CalculateSize(), $_POST["percent"]);
+$myCircle = new Circle('Circle', $newRadius);
+echo "<p> Resized Area: ". $myCircle->CalculateSize();
+
+$myTri = new Triangle('Triangle', $_POST["base"], $_POST['heightT']);
+
+echo "<h1>Shape: ".$myTri->getName()."</h1>";
+echo "<p> Area: ".$myTri->CalculateSize()."</p>";
+$newHeight = $myTri->changeSize($myTri->CalculateSize(),$_POST["percent"]);
+$myTri = new Triangle('Triangle', $_POST["base"], $newHeight);
+echo "<p> Resized Area: ". $myTri->CalculateSize();
 
 $myRec = new Rectangle('Rectangle', $_POST["width"], $_POST['heightR']);
 
 echo "<h1>Shape: ".$myRec->getName()."</h1>";
 echo "<p> Area: ".$myRec->CalculateSize()."</p>";
 
-$myTri = new Triangle('Triangle', $_POST["base"], $_POST['heightT']);
-
-echo "<h1>Shape: ".$myTri->getName()."</h1>";
-echo "<p> Area: ".$myTri->CalculateSize()."</p>";
 ?>
-
-
 </body>
 </html>
