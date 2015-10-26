@@ -15,13 +15,13 @@ $_SESSION["newHeight"];
 <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
     <fieldset>
         <legend>Circle:</legend>
-        Radius: <input type="text" name="radius" value="<?php echo $_SESSION['newRadius']?>">
+        Radius: <input type="text" name="radius" value="<?php if(!empty($_SESSION['newRadius'])){ echo $_SESSION['newRadius'];}else{ echo $_POST['radius'];}?>">
     </fieldset>
 
     <fieldset>
         <legend>Triangle:</legend>
         Base:   <input type="text" name="base" value="<?php echo $_POST['base']?>" >
-        Height: <input type="text" name="heightT" value="<?php echo $_SESSION['newHeight']?>">
+        Height: <input type="text" name="heightT" value="<?php if(!empty($_SESSION['newHeight'])){ echo $_SESSION['newHeight'];}else{ echo $_POST['heightT'];}?>">
     </fieldset>
 
     <fieldset>
