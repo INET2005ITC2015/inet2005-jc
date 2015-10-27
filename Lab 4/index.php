@@ -7,8 +7,8 @@ $_SESSION["newHeight"];
 <!DOCTYPE html>
 <html>
 <head lang="en">
-  <meta charset="UTF-8">
-  <title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
 
@@ -40,17 +40,12 @@ $_SESSION["newHeight"];
 </form>
 
 <?php
-
 require_once("Triangle.php");
 require_once("Rectangle.php");
 require_once("Circle.php");
-
 if(!empty($_POST["radius"]) && !empty($_POST["base"]) && !empty($_POST["heightT"]) && !empty($_POST["width"]) && !empty($_POST["heightR"])) {
-
     echo "<p>Results:</p>";
-
     $myCircle = new Circle('Circle', $_POST["radius"]);
-
     echo "<h1>Shape: " . $myCircle->getName() . "</h1>";
     echo "<p> Area: " . $myCircle->CalculateSize() . "</p>";
     if (!empty($_POST['percent'])) {
@@ -60,10 +55,7 @@ if(!empty($_POST["radius"]) && !empty($_POST["base"]) && !empty($_POST["heightT"
         echo "<p> New Radius: " . $newRadius . "</p>";
         echo "<p> New Area: " . $myCircle->CalculateSize() . "</p>";
     }
-
-
     $myTri = new Triangle('Triangle', $_POST["base"], $_POST['heightT']);
-
     echo "<h1>Shape: " . $myTri->getName() . "</h1>";
     echo "<p> Area: " . $myTri->CalculateSize() . "</p>";
     if (!empty($_POST['percent'])) {
@@ -73,9 +65,7 @@ if(!empty($_POST["radius"]) && !empty($_POST["base"]) && !empty($_POST["heightT"
         echo "<p> New Height: " . $newHeight . "</p>";
         echo "<p> New Area: " . $myTri->CalculateSize() . "</p>";
     }
-
     $myRec = new Rectangle('Rectangle', $_POST["width"], $_POST['heightR']);
-
     echo "<h1>Shape: " . $myRec->getName() . "</h1>";
     echo "<p> Area: " . $myRec->CalculateSize() . "</p>";
 }
