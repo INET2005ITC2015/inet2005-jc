@@ -5,14 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- link jQuery on Google Hosted Libraries CDN -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!-- link jQuery locally -->
+    <script>
+        $(function() {
+            $( document ).tooltip();
+        });
+    </script>
     <!--<script type="text/javascript" src="jquery-1.11.1.js"></script>-->
     <script type="text/javascript" src="myCode.js"></script>
 </head>
 <body>
 <form action="" name="searchForm">
     <p>Search:
-        <input type="search" name="searchExpr" id="searchExpr"/>
+        <input type="search" name="searchExpr" id="searchExpr" title="Please search for an Employee"/>
     </p>
     <p>Suggestions:<br/>
         <span id="TxtHint"></span>

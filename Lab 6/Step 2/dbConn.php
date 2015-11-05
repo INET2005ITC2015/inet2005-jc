@@ -30,7 +30,7 @@ function selectEmpWithNameStartingWith($searchString)
     global $result;
     $sqlStatement = "SELECT * FROM employees WHERE first_name LIKE '";
     $sqlStatement .= $searchString;
-    $sqlStatement .= "%';";
+    $sqlStatement .= "%'limit 0,10;";
     $result = mysqli_query($dbConnection,$sqlStatement);
     if(!$result)
     {
