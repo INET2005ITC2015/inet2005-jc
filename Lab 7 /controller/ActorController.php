@@ -20,7 +20,7 @@ class ActorController
 
     public function updateAction($actorID)
     {
-        $currentCustomer = $this->model->getActor($actorID);
+        $currentActor = $this->model->getActor($actorID);
 
         include '../view/editActor.php';
     }
@@ -29,18 +29,17 @@ class ActorController
     {
         $lastOperationResults = "";
 
-        $currentCustomer = $this->model->getActor($actorID);
+        $currentActor = $this->model->getActor($actorID);
 
-        $currentCustomer->setFirstName($fName);
-        $currentCustomer->setLastName($lName);
+        $currentActor->setFirstName($fName);
+        $currentActor->setLastName($lName);
 
         $lastOperationResults = $this->model->updateActor($currentActor);
 
-        $arrayOfCustomers = $this->model->getAllActors();
+        $arrayOfActors = $this->model->getAllActors();
 
         include '../view/displayActors.php';
     }
-
 
 }
 
