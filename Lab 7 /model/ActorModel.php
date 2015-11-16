@@ -42,6 +42,30 @@ class ActorModel
         
         return $arrayOfActorObjects;
     }
+
+    public function getSearchedActors($search)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $arrayOfSearchedActorObjects = array();
+
+        $this->m_DataAccess->selectSearchedActors($search);
+
+        while($row =  $this->m_DataAccess->fetchActor())
+        {
+
+            $currentActor = new Actor($this->m_DataAccess->fetchActorID($row),
+                $this->m_DataAccess->fetchActorFirstName($row),
+                $this->m_DataAccess->fetchActorLastName($row),
+                $this->m_DataAccess->fetchLastUpdate($row));
+
+            $arrayOfSearchedActorObjects[] = $currentActor;
+        }
+
+        $this->m_DataAccess->closeDB();
+
+        return $arrayOfSearchedActorObjects;
+    }
     
     public function getActor($actorID)
     {
@@ -87,10 +111,15 @@ class ActorModel
     public function AddActor($firstName, $lastName)
     {
         $this->m_DataAccess->connectToDB();
-        $recordsAffected = $this->m_DataAccess->AddActor($firstName, $lastName);
+        $this->m_DataAccess->AddActor($firstName, $lastName);
         $this->m_DataAccess->closeDB();
-        return "$recordsAffected record(s) updated succesfully!";
+    }
 
+    public function searchActor($search)
+    {
+        $this->m_DataAccess->connectToDB();
+        $this->m_DataAccess->searchActor($search);
+        $this->m_DataAccess->closeDB();
     }
 
 

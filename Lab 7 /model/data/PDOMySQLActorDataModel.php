@@ -57,6 +57,25 @@ class PDOMySQLActorDataModel implements iActorDataModel
         }
 
     }
+
+    public function selectSearchedActors($search)
+    {
+
+        $selectStatement = "SELECT * FROM actor WHERE first_name LIKE '%:search%';";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement );
+            $this->stmt->bindParam(':search', $search, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+        }
+        catch(PDOException $ex)
+        {
+            die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
+        }
+
+    }
     
     public function selectActorById($actorID)
     {
@@ -153,7 +172,7 @@ class PDOMySQLActorDataModel implements iActorDataModel
             die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
         }
     }
-    
+
     public function fetchActorID($row)
     {
        return $row['actor_id'];

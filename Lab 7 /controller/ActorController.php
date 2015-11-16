@@ -68,6 +68,12 @@ class ActorController
 
         include '../view/displayActors.php';
     }
+
+    public function searchAction($search)
+    {
+        $arrayOfSearchedActors = $this->model->getSearchedActors($search);
+        include '../view/displayActors.php';
+    }
 }
 
 ?>

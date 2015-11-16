@@ -19,9 +19,14 @@ elseif(isset($_GET['idDel']))
 elseif(isset($_GET['idAdd']))
 {
     $actorController->addAction($_POST['firstName'],$_POST['lastName']);
-}elseif (isset($_POST['AddBtn']))
+}
+elseif (isset($_POST['AddBtn']))
 {
     $actorController->commitAddAction($_POST['firstName'],$_POST['lastName']);
+}
+elseif (isset($_POST['Submit']))
+{
+    $actorController->searchAction($_POST['search']);
 }
 else
 {

@@ -27,6 +27,13 @@ and open the template in the editor.
             endif;
         ?>
         <h1>Current Actors:</h1>
+
+        <form method="post" class="searchForm" id="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            Search:<br>
+            <input type="text" class="search" id="search">
+            <input type="Submit" class="Submit" id="Submit" value="Search">
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -66,7 +73,7 @@ and open the template in the editor.
             <tfoot></tfoot>
         </table>
 
-            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?idAdd=true">Add Actor</a>
+        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?idAdd=true">Add Actor</a>
 
     </body>
 </html>
