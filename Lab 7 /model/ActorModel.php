@@ -69,7 +69,7 @@ class ActorModel
         $recordsAffected = $this->m_DataAccess->updateActor($actorToUpdate->getID(),
                 $actorToUpdate->getFirstName(),
                 $actorToUpdate->getLastName());
-        
+        $this->m_DataAccess->closeDB();
         return "$recordsAffected record(s) updated succesfully!";
     }
 
@@ -79,8 +79,21 @@ class ActorModel
 
         $recordsAffected = $this->m_DataAccess->deleteActor($actorToDelete->getID());
 
+        $this->m_DataAccess->closeDB();
+
         return "$recordsAffected record(s) updated succesfully!";
     }
+
+    public function AddActor($firstName, $lastName)
+    {
+        $this->m_DataAccess->connectToDB();
+        $recordsAffected = $this->m_DataAccess->AddActor($firstName, $lastName);
+        $this->m_DataAccess->closeDB();
+        return "$recordsAffected record(s) updated succesfully!";
+
+    }
+
+
 
 }
 

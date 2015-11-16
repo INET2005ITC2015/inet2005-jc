@@ -132,6 +132,27 @@ class PDOMySQLActorDataModel implements iActorDataModel
             die('Could not delete record from Sakila Database via PDO: ' . $ex->getMessage());
         }
     }
+
+    public function AddActor($firstName, $lastName)
+    {
+        $addStatement = "INSERT INTO actor(first_name,last_name)";
+        $addStatement .= " VALUES(:firstName,:lastName)";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($addStatement);
+            $this->stmt->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+            $this->stmt->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+
+
+            $this->stmt->execute();
+
+        }
+        catch(PDOException $ex)
+        {
+            die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
+        }
+    }
     
     public function fetchActorID($row)
     {
@@ -153,6 +174,7 @@ class PDOMySQLActorDataModel implements iActorDataModel
     {
         return $row['last_update'];
     }
+
 
 }
 

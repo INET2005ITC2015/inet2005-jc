@@ -53,6 +53,21 @@ class ActorController
 
         include '../view/displayActors.php';
     }
+
+    public function addAction()
+    {
+
+        include '../view/addActor.php';
+    }
+
+    public function commitAddAction($firstName, $lastName)
+    {
+        $this->model->AddActor($firstName, $lastName);
+
+        $arrayOfActors = $this->model->getAllActors();
+
+        include '../view/displayActors.php';
+    }
 }
 
 ?>

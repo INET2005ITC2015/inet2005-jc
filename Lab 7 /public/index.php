@@ -16,6 +16,13 @@ elseif(isset($_GET['idDel']))
 {
     $actorController->deleteAction($_GET['idDel']);
 }
+elseif(isset($_GET['idAdd']))
+{
+    $actorController->addAction($_POST['firstName'],$_POST['lastName']);
+}elseif (isset($_POST['AddBtn']))
+{
+    $actorController->commitAddAction($_POST['firstName'],$_POST['lastName']);
+}
 else
 {
     $actorController->displayAction();

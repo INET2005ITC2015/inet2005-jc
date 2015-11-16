@@ -64,6 +64,9 @@ and open the template in the editor.
                 ?>
             </tbody>
             <tfoot></tfoot>
-        </table>  
+        </table>
+
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?idAdd=true">Add Actor</a>
+
     </body>
 </html>
