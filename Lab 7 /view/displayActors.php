@@ -35,6 +35,7 @@ and open the template in the editor.
                     <th>Last Name</th>
                     <th>Update</th>
                     <th>Last Update</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +53,11 @@ and open the template in the editor.
                                 </a>
                             </td>
                             <td><?php echo $actor->getLastUpdate(); ?></td>
+                            <td>
+                                <a href="<?php echo $_SERVER['PHP_SELF']; ?>?idDel=<?php echo $actor->getID(); ?>" onclick="return confirm('Really Delete?')">
+                                    <img src="/images/del.png" height="25px" width="25px"/>
+                                </a>
+                            </td>
                         </tr>
                     <?php
                     endforeach;

@@ -1,8 +1,6 @@
 <?php
 
 require_once '../model/Actor.php';
-
-
 //require_once '../model/data/MySQLiActorDataModel.php';
 require_once '../model/data/PDOMySQLActorDataModel.php';
 
@@ -74,6 +72,16 @@ class ActorModel
         
         return "$recordsAffected record(s) updated succesfully!";
     }
+
+    public function deleteActor($actorToDelete)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $recordsAffected = $this->m_DataAccess->deleteActor($actorToDelete->getID());
+
+        return "$recordsAffected record(s) updated succesfully!";
+    }
+
 }
 
 ?>

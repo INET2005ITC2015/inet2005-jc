@@ -12,6 +12,10 @@ elseif (isset($_POST['UpdateBtn']))
 {
     $actorController->commitUpdateAction($_POST['editActorId'],$_POST['firstName'],$_POST['lastName']);
 }
+elseif(isset($_GET['idDel']))
+{
+    $actorController->deleteAction($_GET['idDel']);
+}
 else
 {
     $actorController->displayAction();

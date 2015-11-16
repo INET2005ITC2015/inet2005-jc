@@ -65,9 +65,9 @@ class MySQLiActorDataModel implements iActorDataModel
     
     public function updateActor($actorID,$first_name,$last_name)
     {
-       $updateStatement = "UPDATE customer";
+       $updateStatement = "UPDATE actor";
        $updateStatement .= " SET first_name = '$first_name',last_name='$last_name'";
-       $updateStatement .= " WHERE customer_id = $actorID;";
+       $updateStatement .= " WHERE actor_id = $actorID;";
        $this->result = @$this->dbConnection->query($updateStatement);
        if(!$this->result)
        {
@@ -76,6 +76,21 @@ class MySQLiActorDataModel implements iActorDataModel
        }
        
        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteActor($actorID)
+    {
+
+        $deleteStatement = "DELETE from actor";
+        $deleteStatement .= " WHERE actor_id = $actorID;";
+        $this->result = @$this->dbConnection->query($deleteStatement);
+        if(!$this->result)
+        {
+            die('Could not Delete record from the Sakila Database: ' .
+                $this->dbConnection->error);
+        }
+
+        return $this->dbConnection->affected_rows;
     }
     
     public function fetchActorID($row)

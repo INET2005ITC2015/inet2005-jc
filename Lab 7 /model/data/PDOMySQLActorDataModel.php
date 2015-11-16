@@ -39,7 +39,9 @@ class PDOMySQLActorDataModel implements iActorDataModel
         $count = 10;
 
         $selectStatement = "SELECT * FROM actor";
+        $selectStatement .= " ORDER BY actor_id DESC";
         $selectStatement .= " LIMIT :start,:count;";
+
 
         try
         {
@@ -108,6 +110,26 @@ class PDOMySQLActorDataModel implements iActorDataModel
         catch(PDOException $ex)
         {
             die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+    public function deleteActor($actorID)
+    {
+        $deleteStatement = "DELETE FROM actor";
+        $deleteStatement .= " WHERE actor_id = :actorID;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($deleteStatement);
+            $this->stmt->bindParam(':actorID', $actorID, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('Could not delete record from Sakila Database via PDO: ' . $ex->getMessage());
         }
     }
     
