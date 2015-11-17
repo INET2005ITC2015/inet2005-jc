@@ -11,9 +11,14 @@ class ActorController
         $this->model = new ActorModel();
     }
     
-    public function displayAction()
+    public function displayAction($search)
     {
-        $arrayOfActors = $this->model->getAllActors();
+        if($search != null) {
+            $currentSearch = $search;
+        }else{
+            $currentSearch = "";
+        }
+        $arrayOfActors = $this->model->getAllActors($search);
 
         include '../view/displayActors.php';
     }
@@ -69,11 +74,6 @@ class ActorController
         include '../view/displayActors.php';
     }
 
-    public function searchAction($search)
-    {
-        $arrayOfSearchedActors = $this->model->getSearchedActors($search);
-        include '../view/displayActors.php';
-    }
 }
 
 ?>

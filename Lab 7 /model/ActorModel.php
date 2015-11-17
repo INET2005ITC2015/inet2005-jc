@@ -19,13 +19,13 @@ class ActorModel
         // not doing anything at the moment
     }
             
-    public function getAllActors()
+    public function getAllActors($search)
     {
         $this->m_DataAccess->connectToDB();
         
         $arrayOfActorObjects = array();
         
-        $this->m_DataAccess->selectActors();
+        $this->m_DataAccess->selectActors($search);
         
         while($row =  $this->m_DataAccess->fetchActor())
         {
@@ -43,30 +43,6 @@ class ActorModel
         return $arrayOfActorObjects;
     }
 
-    public function getSearchedActors($search)
-    {
-        $this->m_DataAccess->connectToDB();
-
-        $arrayOfSearchedActorObjects = array();
-
-        $this->m_DataAccess->selectSearchedActors($search);
-
-        while($row =  $this->m_DataAccess->fetchActor())
-        {
-
-            $currentActor = new Actor($this->m_DataAccess->fetchActorID($row),
-                $this->m_DataAccess->fetchActorFirstName($row),
-                $this->m_DataAccess->fetchActorLastName($row),
-                $this->m_DataAccess->fetchLastUpdate($row));
-
-            $arrayOfSearchedActorObjects[] = $currentActor;
-        }
-
-        $this->m_DataAccess->closeDB();
-
-        return $arrayOfSearchedActorObjects;
-    }
-    
     public function getActor($actorID)
     {
         $this->m_DataAccess->connectToDB();

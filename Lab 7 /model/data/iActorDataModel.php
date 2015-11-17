@@ -10,7 +10,7 @@ interface iActorDataModel
 
     public function closeDB();
 
-    public function selectActors();
+    public function selectActors($search);
     
     public function selectActorById($actorID);
 

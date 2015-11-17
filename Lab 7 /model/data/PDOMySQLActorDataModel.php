@@ -32,51 +32,45 @@ class PDOMySQLActorDataModel implements iActorDataModel
         $this->dbConnection = null;
     }
 
-    public function selectActors()
+    public function selectActors($search)
     {
         // hard-coding for first ten rows
-        $start = 0;
-        $count = 10;
+        if($search == null) {
+            $start = 0;
+            $count = 10;
 
-        $selectStatement = "SELECT * FROM actor";
-        $selectStatement .= " ORDER BY actor_id DESC";
-        $selectStatement .= " LIMIT :start,:count;";
+            $selectStatement = "SELECT * FROM actor";
+            $selectStatement .= " ORDER BY actor_id DESC";
+            $selectStatement .= " LIMIT :start,:count;";
 
 
-        try
-        {
-            $this->stmt = $this->dbConnection->prepare($selectStatement );
-            $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
-            $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
+            try {
+                $this->stmt = $this->dbConnection->prepare($selectStatement);
+                $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
+                $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
 
-            $this->stmt->execute();
-        }
-        catch(PDOException $ex)
-        {
-            die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
-        }
+                $this->stmt->execute();
+            } catch (PDOException $ex) {
+                die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
+            }
+        }else{
+            $search = "%$search%";
+            $selectStatement = "SELECT * FROM actor WHERE first_name LIKE :search";
+            //$selectStatement = "SELECT * FROM actor WHERE first_name LIKE '%thora%'";
 
-    }
+            try {
+                $this->stmt = $this->dbConnection->prepare($selectStatement);
+                $this->stmt->bindParam(':search', $search, PDO::PARAM_STR);
 
-    public function selectSearchedActors($search)
-    {
+                $this->stmt->execute();
+            } catch (PDOException $ex) {
+                die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
+            }
 
-        $selectStatement = "SELECT * FROM actor WHERE first_name LIKE '%:search%';";
-
-        try
-        {
-            $this->stmt = $this->dbConnection->prepare($selectStatement );
-            $this->stmt->bindParam(':search', $search, PDO::PARAM_INT);
-
-            $this->stmt->execute();
-        }
-        catch(PDOException $ex)
-        {
-            die('Could not select records from Sakila Database via PDO: ' . $ex->getMessage());
         }
 
     }
-    
+
     public function selectActorById($actorID)
     {
         $selectStatement = "SELECT * FROM actor";

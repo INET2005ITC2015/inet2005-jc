@@ -28,10 +28,10 @@ and open the template in the editor.
         ?>
         <h1>Current Actors:</h1>
 
-        <form method="post" class="searchForm" id="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <form method="get" class="searchForm" id="searchForm" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             Search:<br>
-            <input type="text" class="search" id="search">
-            <input type="Submit" class="Submit" id="Submit" value="Search">
+            <input type="text" class="search" id="search" name='search' value="<?php echo $currentSearch?>">
+            <input type="submit" id="submit" class="submit">
         </form>
 
         <table>

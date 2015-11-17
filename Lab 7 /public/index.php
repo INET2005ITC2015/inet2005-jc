@@ -24,13 +24,13 @@ elseif (isset($_POST['AddBtn']))
 {
     $actorController->commitAddAction($_POST['firstName'],$_POST['lastName']);
 }
-elseif (isset($_POST['Submit']))
+elseif (isset($_GET['search']))
 {
-    $actorController->searchAction($_POST['search']);
+    $actorController->displayAction($_GET['search']);
 }
 else
 {
-    $actorController->displayAction();
+    $actorController->displayAction($_GET['search']);
 }
 
 ?>
