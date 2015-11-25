@@ -3,24 +3,57 @@
 use App\Article;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\ArticleRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 
 class ArticlesController extends Controller {
 
 	public function index(){
 
-        $articles = Article::all();
+        $articles = Article::latest('publish_at')->published()->get();
         return view('articles.index', compact('articles'));
     }
 
     public function show($id){
 
         $article = Article::find($id);
+          if(!$article){
+           abort(404);
+          }
+        dd($article->publish_at);
+        return view('articles.show', compact('article'));
+    }
+
+    public function create(){
+        return view('articles.create');
+    }
+
+    public function store(ArticleRequest $request){
+
+        //validation
+
+        Article::create($request->all());
+        return redirect('articles');
+    }
+
+    public function edit($id){
+        $article = Article::find($id);
+        if(!$article){
+            abort(404);
+            }
+        return view('articles.edit', compact('article'));
+        }
+
+    public function update($id, ArticleRequest $request){
+        $article = Article::find($id);
         if(!$article){
             abort(404);
         }
-        return view('articles.show', compact('article'));
+        //return $article;
+        $article->update($request->all());
+        return redirect('articles');
     }
 
 }
