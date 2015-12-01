@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Auth;
 
 class ArticlesController extends Controller {
 
@@ -32,9 +32,10 @@ class ArticlesController extends Controller {
 
     public function store(ArticleRequest $request){
 
-        //validation
+        $article = new Article($request->all());
 
-        Article::create($request->all());
+        Auth::user()->articles()->save($article);
+
         return redirect('articles');
     }
 
