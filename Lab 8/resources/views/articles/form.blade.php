@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('publish_at', 'Published On:') !!}
-    {!! Form::input('date', 'publish_at', date('Y-m-d'), ['class' => 'form-control']) !!}
+    {!! Form::input('date', 'publish_at', $article->publish_at->format('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">

@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css"/>
 
 </head>
-<body>
+<body style="padding-top:60px;">
+
+    @include('partials.nav');
 
     <div class="container">
         @include('flash::message')
