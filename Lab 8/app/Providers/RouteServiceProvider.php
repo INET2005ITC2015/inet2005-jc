@@ -2,6 +2,8 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Article;
+use App\Tag;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -29,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider {
         });
 
         $router->bind('tags', function($name){
-            return \App\Tag::where('name', $name)->findOrFail();
+            return \App\Tag::where('name', $name)->firstOrFail();
         });
 
 	}
