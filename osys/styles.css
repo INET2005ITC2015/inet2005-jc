@@ -1,0 +1,19 @@
+table, td, th{
+    border: double black;
+}
+
+#del{
+    background-image: url("del.png");
+}
+
+#update{
+    background-image: url("pencil.png");
+}
+
+.log{
+    float:right;
+}
+
+#asc{
+    margin-left: 2%;
+}
